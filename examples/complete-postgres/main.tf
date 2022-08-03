@@ -2,9 +2,13 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
-  name   = "complete-postgresql"
-  region = "eu-west-1"
+  name             = "complete-postgresql"
+  region           = "eu-west-1"
+  region2          = "eu-central-1"
+  current_identity = data.aws_caller_identity.current.arn
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -90,7 +94,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
   create_cloudwatch_log_group     = true
 
-  backup_retention_period = 0
+  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 
@@ -99,6 +103,7 @@ module "db" {
   create_monitoring_role                = true
   monitoring_interval                   = 60
   monitoring_role_name                  = "example-monitoring-role-name"
+  monitoring_role_use_name_prefix       = true
   monitoring_role_description           = "Description for monitoring role"
 
   parameters = [
@@ -124,7 +129,8 @@ module "db" {
 module "db_default" {
   source = "../../"
 
-  identifier = "${local.name}-default"
+  identifier                     = "${local.name}-default"
+  instance_use_identifier_prefix = true
 
   create_db_option_group    = false
   create_db_parameter_group = false
@@ -163,4 +169,41 @@ module "db_disabled" {
   create_db_instance        = false
   create_db_parameter_group = false
   create_db_option_group    = false
+}
+
+################################################################################
+# RDS Automated Backups Replication Module
+################################################################################
+provider "aws" {
+  alias  = "region2"
+  region = local.region2
+}
+
+module "kms" {
+  source      = "terraform-aws-modules/kms/aws"
+  version     = "~> 1.0"
+  description = "KMS key for cross region automated backups replication"
+
+  # Aliases
+  aliases                 = [local.name]
+  aliases_use_name_prefix = true
+
+  key_owners = [local.current_identity]
+
+  tags = local.tags
+
+  providers = {
+    aws = aws.region2
+  }
+}
+
+module "db_automated_backups_replication" {
+  source = "../../modules/db_instance_automated_backups_replication"
+
+  source_db_instance_arn = module.db.db_instance_arn
+  kms_key_arn            = module.kms.key_arn
+
+  providers = {
+    aws = aws.region2
+  }
 }

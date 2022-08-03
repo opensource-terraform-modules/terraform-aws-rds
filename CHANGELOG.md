@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.0.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.0...v5.0.1) (2022-07-25)
+
+
+### Bug Fixes
+
+* Cloudwatch Log Group deletion db_instance dependency ([#423](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/423)) ([e6351a3](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/e6351a3f2bc57db305be68c78cfdce65bbb82aaf))
+
+## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.7.0...v5.0.0) (2022-07-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Terraform and provider versions to v1.x and v4.x, mark password input as sensitive (#420)
+
+### Features
+
+* Update Terraform and provider versions to v1.x and v4.x, mark password input as sensitive ([#420](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/420)) ([808407d](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/808407dfb4944ca2701d3c9d25d8f4347238dddd))
+
+## [4.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.6.0...v4.7.0) (2022-07-14)
+
+
+### Features
+
+* Add support for `aws_db_instance_automated_backups_replication` ([#413](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/413)) ([f1e15a1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/f1e15a16a30fa291a33ff9719cc72687124e96d0))
+
+## [4.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.5.0...v4.6.0) (2022-07-13)
+
+
+### Features
+
+* Support `name_prefix` in `iam_role.enhanced_monitoring` ([#418](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/418)) ([644d255](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/644d25528017bc6a7d0c73fbb9b91243ff51933b))
+
+## [4.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.4.0...v4.5.0) (2022-07-06)
+
+
+### Features
+
+* Add support for `identifier_prefix` ([#416](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/416)) ([125c426](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/125c426fc00cd1f2744189a30f9225778169cefb))
+
+## [4.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.3.0...v4.4.0) (2022-05-27)
+
+
+### Features
+
+* Add `engine` and `engine_version_actual` outputs ([#404](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/404)) ([00b9858](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/00b98589d2e8e37a24118887241d74d2b8d0715c))
+
+## [4.3.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.2.0...v4.3.0) (2022-04-27)
+
+
+### Features
+
+* Support `source_db_instance_automated_backups_arn` parameter in `restore_to_point_in_time` block ([#398](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/398)) ([559e6b1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/559e6b11b76b428e8752e094366c36bea2c2c298))
+
 ## [4.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.3...v4.2.0) (2022-03-12)
 
 

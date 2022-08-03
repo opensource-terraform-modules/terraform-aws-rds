@@ -3,6 +3,12 @@ variable "identifier" {
   type        = string
 }
 
+variable "instance_use_identifier_prefix" {
+  description = "Determines whether to use `identifier` as is or create a unique identifier beginning with `identifier` as the specified prefix"
+  type        = bool
+  default     = false
+}
+
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
   type        = string
@@ -121,6 +127,7 @@ variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
   default     = null
+  sensitive   = true
 }
 
 variable "port" {
@@ -175,6 +182,12 @@ variable "monitoring_role_name" {
   description = "Name of the IAM role which will be created when create_monitoring_role is enabled"
   type        = string
   default     = "rds-monitoring-role"
+}
+
+variable "monitoring_role_use_name_prefix" {
+  description = "Determines whether to use `monitoring_role_name` as is or create a unique identifier beginning with `monitoring_role_name` as the specified prefix"
+  type        = bool
+  default     = false
 }
 
 variable "monitoring_role_description" {

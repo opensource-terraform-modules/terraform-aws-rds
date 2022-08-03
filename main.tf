@@ -69,8 +69,9 @@ module "db_option_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create     = local.create_db_instance
-  identifier = var.identifier
+  create                = local.create_db_instance
+  identifier            = var.identifier
+  use_identifier_prefix = var.instance_use_identifier_prefix
 
   engine            = var.engine
   engine_version    = var.engine_version
@@ -114,16 +115,17 @@ module "db_instance" {
   performance_insights_retention_period = var.performance_insights_retention_period
   performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
 
-  replicate_source_db         = var.replicate_source_db
-  replica_mode                = var.replica_mode
-  backup_retention_period     = var.backup_retention_period
-  backup_window               = var.backup_window
-  max_allocated_storage       = var.max_allocated_storage
-  monitoring_interval         = var.monitoring_interval
-  monitoring_role_arn         = var.monitoring_role_arn
-  monitoring_role_name        = var.monitoring_role_name
-  monitoring_role_description = var.monitoring_role_description
-  create_monitoring_role      = var.create_monitoring_role
+  replicate_source_db             = var.replicate_source_db
+  replica_mode                    = var.replica_mode
+  backup_retention_period         = var.backup_retention_period
+  backup_window                   = var.backup_window
+  max_allocated_storage           = var.max_allocated_storage
+  monitoring_interval             = var.monitoring_interval
+  monitoring_role_arn             = var.monitoring_role_arn
+  monitoring_role_name            = var.monitoring_role_name
+  monitoring_role_use_name_prefix = var.monitoring_role_use_name_prefix
+  monitoring_role_description     = var.monitoring_role_description
+  create_monitoring_role          = var.create_monitoring_role
 
   character_set_name = var.character_set_name
   timezone           = var.timezone
